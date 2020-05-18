@@ -60,8 +60,8 @@ void Producer::operator()() {
             //consume los recursos
             storage->consumeResources(wheat_consumption,wood_consumption,
                     iron_consumption, carbon_consumption);
-            usleep(MS_PRODUCER_SLEEP);//duermo
-            //deposito los puntos de beneficio
+            usleep(MS_PRODUCER_SLEEP);//duerme
+            //deposita los puntos de beneficio
             this->counter.add(profit_points);
         } catch(ClosedStorageException& e){
             this->is_producing = false;

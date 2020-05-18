@@ -12,6 +12,29 @@
 //cpplint
 #include <string>
 
+class FailedToOpenFileException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Failed to open";
+    }
+};
+
+class InvalidMapCharacterException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Map has an invalid character";
+    }
+};
+
+class InvalidWorkerSyntaxException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Workers file invalid syntax";
+    }
+};
+
+
+
 class FileReader{
     private:
         std::ifstream fs;
@@ -22,16 +45,15 @@ class FileReader{
 
         std::map<std::string, int> getMapOfWorkers();
 
-        std::map<char, int> getMapOfResources();
-
         std::list<char> getResources();
 
-private:
-        void addWorkerToMap(std::map<std::string, int>& workers,
-                const std::string& line);
+        ~FileReader();
 
-        void addResourceToMap(std::map<char, int>& resources,
-                char input_char);
+    private:
+        void addWorkerToMap(std::map<std::string, int>& workers,
+                    const std::string& line) const;
+
+        void isValidChar(char input_char) const;
 };
 
 #endif //TP2CLION_FILE_READER_H

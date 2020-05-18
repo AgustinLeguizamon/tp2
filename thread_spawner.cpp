@@ -8,58 +8,41 @@
 #include <map>
 #include <string>
 
-void ThreadSpawner::spawnWorkersThreads() {
-    //aca llamo a los 6 metodos privados spawner
-}
-
 ThreadSpawner::ThreadSpawner(std::map<std::string, int> &workers) :
-     workers(workers)
-     {}
+        workers(workers)
+{}
 
-void ThreadSpawner::spawnFarmers(BlockingQueue *p_source,
-        Storage *p_storage) {
-    int n = workers["Agricultores"];
+void ThreadSpawner::spawnProducersThreads(Storage *p_storage,
+        Counter &counter) {
+    this->spawnCooks(p_storage, counter);
+    this->spawnCarpenters(p_storage, counter);
+    this->spawnGunSmiths(p_storage, counter);
+}
 
-    farmers.reserve(n);
-    for (int i = 0; i < n; ++i) {
-        farmers.emplace_back(p_source, p_storage);
+void ThreadSpawner::spawnWorkersThreads(Storage *p_storage,
+        BlockingQueue &wheat_source, BlockingQueue &wood_source,
+        BlockingQueue &iron_and_carbon_source) {
+    int n_farmers = workers["Agricultores"];
+    int n_woodcutters = workers["Leniadores"];
+    int n_miners = workers["Mineros"];
+
+    int total_gatherers = n_farmers + n_woodcutters + n_miners;
+    gatherers.reserve(total_gatherers);
+    for (int i = 0; i < n_farmers; ++i) {
+        gatherers.emplace_back(&wheat_source, p_storage);
     }
-
-    workers_threads.reserve(farmers.size());
-    for (auto & farmer : farmers) {
-        workers_threads.emplace_back(std::ref(farmer));
+    for (int i = 0; i < n_woodcutters; ++i) {
+        gatherers.emplace_back(&wood_source, p_storage);
+    }
+    for (int i = 0; i < n_miners; ++i) {
+        gatherers.emplace_back(&iron_and_carbon_source, p_storage);
+    }
+    workers_threads.reserve(gatherers.size());
+    for (auto & worker : gatherers) {
+        workers_threads.emplace_back(std::ref(worker));
     }
 }
 
-void ThreadSpawner::spawnWoodCutters(BlockingQueue *p_source,
-        Storage *p_storage) {
-    int n = workers["Leniadores"];
-
-    woodcutters.reserve(n);
-    for (int i = 0; i < n; ++i) {
-        woodcutters.emplace_back(p_source, p_storage);
-    }
-
-    workers_threads.reserve(woodcutters.size());
-    for (auto & wood_cutter : woodcutters) {
-        workers_threads.emplace_back(std::ref(wood_cutter));
-    }
-}
-
-void ThreadSpawner::spawnMiners(BlockingQueue *p_source,
-        Storage *p_storage) {
-    int n = workers["Mineros"];
-
-    miners.reserve(n);
-    for (int i = 0; i < n; ++i) {
-        miners.emplace_back(p_source, p_storage);
-    }
-
-    workers_threads.reserve(miners.size());
-    for (auto & miner : miners) {
-        workers_threads.emplace_back(std::ref(miner));
-    }
-}
 
 void ThreadSpawner::spawnCooks(Storage *p_storage, Counter &counter) {
     int n_cook = workers["Cocineros"];
@@ -74,7 +57,6 @@ void ThreadSpawner::spawnCooks(Storage *p_storage, Counter &counter) {
         producers_threads.emplace_back(std::ref(cook));
     }
 }
-
 
 void ThreadSpawner::spawnCarpenters(Storage *p_storage, Counter &counter) {
     int n_carpenter = workers["Carpinteros"];

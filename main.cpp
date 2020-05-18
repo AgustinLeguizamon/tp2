@@ -12,14 +12,31 @@
 #include <string>
 #include <list>
 
+#define ERROR 1
+
 int main(int argc, char const *argv[]){
     FileReader file_reader(argv[1]);
 
-    std::map<std::string, int> workers = file_reader.getMapOfWorkers();
+    std::map<std::string, int> workers;
+    try {
+        workers = file_reader.getMapOfWorkers();
+    } catch(FailedToOpenFileException &e){
+        return ERROR;
+    } catch(InvalidWorkerSyntaxException &e){
+        return ERROR;
+    }
 
     file_reader.changeReadingFile(argv[2]);
 
-    std::list<char> resources = file_reader.getResources();
+    std::list<char> resources;
+    try {
+        resources = file_reader.getResources();
+    } catch(FailedToOpenFileException &e){
+        return ERROR;
+    } catch(InvalidMapCharacterException &e){
+        return ERROR;
+    }
+
 
     //trabajo con tod el contenido del archivo en memoria,
     // seria mejor leer caracter a caracter
@@ -38,14 +55,9 @@ int main(int argc, char const *argv[]){
     Printer printer(storage, profit_counter);
 
     ThreadSpawner thread_spawner(workers);
-
-    thread_spawner.spawnCooks(&storage, profit_counter);
-    thread_spawner.spawnCarpenters(&storage, profit_counter);
-    thread_spawner.spawnGunSmiths(&storage, profit_counter);
-
-    thread_spawner.spawnFarmers(&wheat_source, &storage);
-    thread_spawner.spawnWoodCutters(&wood_source, &storage);
-    thread_spawner.spawnMiners(&iron_and_carbon_source, &storage);
+    thread_spawner.spawnProducersThreads(&storage, profit_counter);
+    thread_spawner.spawnWorkersThreads(&storage, wheat_source,
+            wood_source, iron_and_carbon_source);
 
     ResourceGenerator resource_generator(resources,
             wheat_source, wood_source, iron_and_carbon_source);
