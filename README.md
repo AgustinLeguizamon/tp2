@@ -24,7 +24,7 @@ La sincronización entre ambos grupos de hilos (recolectores y productores) se l
 
 La explicación de cada clase se da en el orden en que son creadas para dar una idea al lector de en qué momento empiezan a operar los hilos.
 
-####File Reader
+#### File Reader
 Encargado de leer ambos archivos, primero lee el archivo de texto trabajadores.cfg para obtener el número de productores y recolectores (hilos) que estarán operando.
 El nombre del productor junto con su número son guardados en un diccionario.
 Luego cierra este archivo y pasa a leer el mapa de los recursos (mapa.txt) de a un carácter y almacenarlos en una lista.
