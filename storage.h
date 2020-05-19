@@ -23,7 +23,7 @@ public:
 class Producer;
 
 class Storage {
-public:
+private:
     typedef enum resource_t{
         WHEAT,
         WOOD,
@@ -31,7 +31,6 @@ public:
         CARBON,
     }resource_t;
 
-private:
     std::mutex mutex;
     std::map<resource_t, std::queue<Resource*> > inventory;
     std::condition_variable cond_var;
@@ -51,7 +50,13 @@ public:
     void consumeResources(unsigned int wheat_qty, unsigned int wood_qty,
                           unsigned int iron_qty, unsigned int carbon_qty);
 
-    unsigned int freeRemainingResource(resource_t resource);
+    unsigned int getWheat();
+
+    unsigned int getWood();
+
+    unsigned int getIron();
+
+    unsigned int getCarbon();
 
     void close();
 

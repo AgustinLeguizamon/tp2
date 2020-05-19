@@ -4,13 +4,9 @@
 
 #include "storage.h"
 
-#define CARPENTER_WOOD_QTY
-
 Storage::Storage() :
     is_close(false)
     {}
-
-Storage::~Storage() = default;
 
 void Storage::addResource(Wheat* wheat) {
     std::unique_lock<std::mutex> lock(mutex);
@@ -36,12 +32,12 @@ void Storage::addResource(Carbon *carbon) {
     cond_var.notify_all();
 }
 
-
 void Storage::close() {
     std::unique_lock<std::mutex> lock(mutex);
     this->is_close = true;
     this->cond_var.notify_all();
 }
+
 
 void Storage::consumeResources(const unsigned int wheat_qty,
         const unsigned int wood_qty,
@@ -75,13 +71,29 @@ void Storage::consumeResources(const unsigned int wheat_qty,
     }
 }
 
-unsigned int Storage::freeRemainingResource(resource_t resource) {
-    int resources_freed = 0;
-
-    while (!inventory[resource].empty()){
-        delete(inventory[resource].front());
-        inventory[resource].pop();
-        resources_freed++;
-    }
-    return resources_freed;
+unsigned  int Storage::getWheat(){
+    return inventory[WHEAT].size();
 }
+
+unsigned  int Storage::getWood(){
+    return inventory[WOOD].size();
+}
+
+unsigned  int Storage::getIron(){
+    return inventory[IRON].size();
+}
+
+unsigned  int Storage::getCarbon(){
+    return inventory[CARBON].size();
+}
+
+Storage::~Storage(){
+    //libera todos los recursos restantes en el inventario
+    for (auto & resources : inventory){
+        while (!resources.second.empty()){
+            delete(resources.second.front());
+            resources.second.pop();
+        }
+    }
+}
+

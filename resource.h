@@ -13,36 +13,27 @@ class Storage;
 
 class Resource {
     public:
-        virtual void sayWhatResourceYouAre() = 0;
         virtual void addYourselfTo(Storage *p_storage) = 0;
         virtual ~Resource();
 };
 
-
 class Wheat: public Resource {
     public:
-        void sayWhatResourceYouAre() override;
         void addYourselfTo(Storage *p_storage) override;
 };
-
 
 class Wood : public Resource {
     public:
-        void sayWhatResourceYouAre() override;
         void addYourselfTo(Storage *p_storage) override;
 };
-
 
 class Iron: public Resource {
     public:
-        void sayWhatResourceYouAre() override;
         void addYourselfTo(Storage *p_storage) override;
 };
 
-
 class Carbon : public Resource {
     public:
-        void sayWhatResourceYouAre() override;
         void addYourselfTo(Storage *p_storage) override;
 };
 

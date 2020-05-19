@@ -25,28 +25,23 @@ public:
             unsigned int profit_points, unsigned int wheat,
             unsigned int wood, unsigned int iron,
             unsigned int carbon);
-    virtual void sayWhatProducerYouAre() = 0;
     void operator()();
 };
 
 class Cook : public Producer{
 public:
     explicit Cook(Storage* storage, Counter& counter);
-    void sayWhatProducerYouAre() override;
-    //void operator()() override ;
 };
 
 
 class Carpenter : public Producer{
 public:
     explicit Carpenter(Storage* storage, Counter& counter);
-    void sayWhatProducerYouAre() override;
 };
 
 class Gunsmith : public Producer{
 public:
     explicit Gunsmith(Storage* storage, Counter& counter);
-    void sayWhatProducerYouAre() override;
 };
 
 

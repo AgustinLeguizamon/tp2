@@ -1,7 +1,6 @@
 #include "file_reader.h"
 #include "resource_generator.h"
 #include "blocking_queue.h"
-#include "resource.h"
 #include "worker.h"
 #include "thread_spawner.h"
 #include "counter.h"
@@ -37,21 +36,12 @@ int main(int argc, char const *argv[]){
         return ERROR;
     }
 
-
-    //trabajo con tod el contenido del archivo en memoria,
-    // seria mejor leer caracter a caracter
-/**Aca termina el file reader*/
-
-/**El main thread spawnea a todos los demas*/
-
     BlockingQueue wheat_source;
     BlockingQueue wood_source;
     BlockingQueue iron_and_carbon_source;
     Storage storage;
     Counter profit_counter;
 
-/**Los workers ya deben estar esperando por recursos antes que
- * el main thread empieze a llenar las colas*/
     Printer printer(storage, profit_counter);
 
     ThreadSpawner thread_spawner(workers);

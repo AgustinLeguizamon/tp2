@@ -2,7 +2,6 @@
 // Created by agustin on 8/5/20.
 //
 
-#include <iostream>
 #include <unistd.h>
 #include "worker.h"
 

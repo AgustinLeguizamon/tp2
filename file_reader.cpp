@@ -2,7 +2,6 @@
 // Created by agustin on 7/5/20.
 //
 
-#include <iostream>
 #include "file_reader.h"
 //cpplint
 #include <map>

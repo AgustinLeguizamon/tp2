@@ -69,14 +69,3 @@ void Producer::operator()() {
     }
 }
 
-void Cook::sayWhatProducerYouAre() {
-    std::cout << "i'm Cook: " << profit_points << std::endl;
-}
-
-void Carpenter::sayWhatProducerYouAre() {
-    std::cout << "i'm Carpenter: " << profit_points << std::endl;
-}
-
-void Gunsmith::sayWhatProducerYouAre() {
-    std::cout << "i'm Gunsmith: " << profit_points << std::endl;
-}
