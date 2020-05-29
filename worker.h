@@ -21,8 +21,11 @@ class Worker{
 
         Worker(Worker&& other) noexcept;
 
+        /*Quita un recurso de assigned_source, duerme el hilo por 50ms y los
+         * deposita en storage*/
         void collectAResource();
 
+        /*Llama a collectAResource mientras is_working = true*/
         void operator()();
 };
 

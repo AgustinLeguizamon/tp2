@@ -29,10 +29,14 @@ class BlockingQueue {
 
         BlockingQueue(const BlockingQueue& other) = delete;
 
+        /*Agrega @param resource a la queue y notifica a todos los hilos*/
         void push(Resource* resource);
 
+        /*Remueve y devuelve el primer elemento de la queue
+         * Si la queue esta vacia, pone en espera al hilo*/
         Resource* pop();
 
+        /*is_close pasa a ser false y notifica a todos los hilos*/
         void close();
 
         ~BlockingQueue();

@@ -22,6 +22,7 @@ private:
 public:
     explicit Game(const char* argv[]);
 
+    /*Crea todas las clases del programa y lanza los hilos*/
     void operator()();
 };
 

@@ -9,6 +9,8 @@
 class Storage;
 class Resource {
     public:
+        /*DoubleDispatch: el recurso se agrega a si mismo al
+         * inventario de @param storage*/
         virtual void addYourselfTo(Storage &storage) = 0;
         virtual ~Resource();
 };

@@ -30,22 +30,27 @@ public:
 
     Producer(Producer&& other) noexcept;
 
+    /*Consume los recursos del inventario Storage, pone a dormir el hilo por 60ms y luego los deposita
+     * como puntos en el contador ProfitCounter*/
     void operator()();
 };
 
 class Cook : public Producer{
 public:
+    /*LLama al constructor base*/
     explicit Cook(Storage &storage, Counter& counter);
 };
 
 
 class Carpenter : public Producer{
 public:
+    /*LLama al constructor base*/
     explicit Carpenter(Storage &storage, Counter& counter);
 };
 
 class Gunsmith : public Producer{
 public:
+    /*LLama al constructor base*/
     explicit Gunsmith(Storage &storage, Counter& counter);
 };
 

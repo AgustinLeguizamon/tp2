@@ -15,12 +15,6 @@ FileReader::FileReader(const std::string &workers, const std::string &map) {
     this->fs_resources.open(map);
 }
 
-void FileReader::changeReadingFile(const std::string &file_name) {
-    fs_workers.close();
-    fs_workers.clear();
-    this->fs_resources.open(file_name);
-}
-
 std::map<std::string, int> FileReader::getMapOfWorkers(){
     std::map<std::string, int> workers;
     std::string line;

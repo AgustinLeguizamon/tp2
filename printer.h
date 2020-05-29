@@ -17,6 +17,7 @@ private:
 public:
     Printer(Storage &storage, Counter &profit_counter);
 
+    /*Imprime por pantalla los resultados del juego*/
     void showResults() const;
 };
 

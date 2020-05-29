@@ -31,21 +31,28 @@ private:
 public:
     explicit ThreadSpawner(std::map<std::string, int> &workers);
 
+    /*Lanza los hilos de todos los productores*/
     void spawnProducersThreads(Storage &storage, Counter &counter);
 
+    /*Lanza los hilos de todos los recolectores*/
     void spawnWorkersThreads(Storage &storage, BlockingQueue &wheat_source,
                              BlockingQueue &wood_source,
                              BlockingQueue &iron_and_carbon_source);
 
+    /*Joinea los hilos de recolectores*/
     void joinWorkers();
 
+    /*Joinea los hilos de los productores*/
     void joinProducers();
 
 private:
+    /*Lanza los hilos de cocineros*/
     void spawnCooks(Storage &storage, Counter &counter);
 
+    /*Lanza los hilos de armeros*/
     void spawnGunSmiths(Storage &storage, Counter &counter);
 
+    /*Lanza los hilos de carpinteros*/
     void spawnCarpenters(Storage &storage, Counter &counter);
 };
 

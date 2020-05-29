@@ -18,8 +18,10 @@ public:
 
     Counter(const Counter& other) = delete;
 
+    /*Agrega el @param profit_points a total_profit_points*/
     void add(unsigned int profit_points);
 
+    /*Devuelve total_profit_points*/
     unsigned int getPoints() const;
 };
 

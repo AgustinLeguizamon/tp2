@@ -33,28 +33,32 @@ public:
     }
 };
 
-
-
 class FileReader{
-    private:
-        std::ifstream fs_workers;
-        std::ifstream fs_resources;
-    public:
-        explicit FileReader(const std::string &workers, const std::string &map);
+private:
+    std::ifstream fs_workers;
+    std::ifstream fs_resources;
 
-        void changeReadingFile(const std::string& file_name);
+public:
+    /*Abre los dos archivos de nombre @param workers y @param map */
+    explicit FileReader(const std::string &workers, const std::string &map);
 
-        std::map<std::string, int> getMapOfWorkers();
+    /*Devuelve un mapa con key: nombre de los trabajadores y value: cantidad*/
+    std::map<std::string, int> getMapOfWorkers();
 
-        std::list<char> getResources();
+    /*Devuelve una lista con todos los caracteres del archivo mapa*/
+    std::list<char> getResources();
 
-        ~FileReader();
+    ~FileReader();
 
-    private:
-        void addWorkerToMap(std::map<std::string, int>& workers,
-                    const std::string& line) const;
+private:
+    /*Agrega al mapa el trabajador y la cantidad que vienen
+     * en el string @param line*/
+    void addWorkerToMap(std::map<std::string, int>& workers,
+                const std::string& line) const;
 
-        void isValidChar(char input_char) const;
+    /*Lanza una excepcion si el caracter @param input_char no corresponde a ninguno
+     * de los caracteres definidos para cada recurso (T,H,M,C)*/
+    void isValidChar(char input_char) const;
 };
 
 #endif //TP2CLION_FILE_READER_H
