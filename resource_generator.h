@@ -6,11 +6,10 @@
 #define TP2CLION_RESOURCE_GENERATOR_H
 
 
-#include <vector>
-#include <list>
-#include "resource.h"
 #include "blocking_queue.h"
+#include <list>
 
+class Resource;
 class ResourceGenerator {
     private:
         std::list<char> &resources;

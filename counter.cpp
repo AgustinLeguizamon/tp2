@@ -2,7 +2,6 @@
 // Created by agustin on 12/5/20.
 //
 
-#include <iostream>
 #include "counter.h"
 
 Counter::Counter() :

@@ -9,14 +9,15 @@
 #include <string>
 #include <map>
 #include <thread>
-#include "blocking_queue.h"
-#include "worker.h"
-#include "counter.h"
 #include "producer.h"
+#include "worker.h"
 
 //cpplint
 #include <vector>
 
+class Counter;
+class BlockingQueue;
+class Producer;
 class ThreadSpawner {
 private:
     std::map<std::string, int>& workers;

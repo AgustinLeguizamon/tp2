@@ -19,9 +19,7 @@ public:
     }
 };
 
-
 class Producer;
-
 class Storage {
 private:
     typedef enum resource_t{

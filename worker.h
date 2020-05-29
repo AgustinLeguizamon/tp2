@@ -5,12 +5,10 @@
 #ifndef TP2CLION_WORKER_H
 #define TP2CLION_WORKER_H
 
-#include <vector>
-#include <queue>
 #include "resource.h"
 #include "blocking_queue.h"
-#include "storage.h"
 
+class Storage;
 class Worker{
         Storage& storage;
         BlockingQueue& assigned_source;

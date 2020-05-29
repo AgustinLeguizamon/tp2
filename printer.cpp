@@ -2,6 +2,7 @@
 // Created by agustin on 13/5/20.
 //
 
+#include <iostream>
 #include "printer.h"
 
 Printer::Printer(Storage &storage, Counter &profit_counter) :

@@ -5,12 +5,8 @@
 #ifndef TP2CLION_RESOURCE_H
 #define TP2CLION_RESOURCE_H
 
-#include <iostream>
-#include <map>
-#include <queue>
 
 class Storage;
-
 class Resource {
     public:
         virtual void addYourselfTo(Storage &storage) = 0;
