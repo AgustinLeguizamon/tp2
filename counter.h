@@ -16,6 +16,8 @@ private:
 public:
     Counter();
 
+    Counter(const Counter& other) = delete;
+
     void add(unsigned int profit_points);
 
     unsigned int getPoints();

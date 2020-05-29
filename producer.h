@@ -11,7 +11,7 @@
 
 class Producer {
 protected:
-    Storage* storage;
+    Storage& storage;
     Counter& counter;
     const unsigned int profit_points;
     bool is_producing;
@@ -21,27 +21,30 @@ protected:
     const unsigned int carbon_consumption;
 
 public:
-    explicit Producer(Storage* storage, Counter& counter,
+    explicit Producer(Storage& storage, Counter& counter,
             unsigned int profit_points, unsigned int wheat,
             unsigned int wood, unsigned int iron,
             unsigned int carbon);
+
+    //Producer(const Producer& other) = delete;
+
     void operator()();
 };
 
 class Cook : public Producer{
 public:
-    explicit Cook(Storage* storage, Counter& counter);
+    explicit Cook(Storage &storage, Counter& counter);
 };
 
 
 class Carpenter : public Producer{
 public:
-    explicit Carpenter(Storage* storage, Counter& counter);
+    explicit Carpenter(Storage &storage, Counter& counter);
 };
 
 class Gunsmith : public Producer{
 public:
-    explicit Gunsmith(Storage* storage, Counter& counter);
+    explicit Gunsmith(Storage &storage, Counter& counter);
 };
 
 

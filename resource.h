@@ -13,28 +13,28 @@ class Storage;
 
 class Resource {
     public:
-        virtual void addYourselfTo(Storage *p_storage) = 0;
+        virtual void addYourselfTo(Storage &storage) = 0;
         virtual ~Resource();
 };
 
 class Wheat: public Resource {
     public:
-        void addYourselfTo(Storage *p_storage) override;
+        void addYourselfTo(Storage &storage) override;
 };
 
 class Wood : public Resource {
     public:
-        void addYourselfTo(Storage *p_storage) override;
+        void addYourselfTo(Storage &storage) override;
 };
 
 class Iron: public Resource {
     public:
-        void addYourselfTo(Storage *p_storage) override;
+        void addYourselfTo(Storage &storage) override;
 };
 
 class Carbon : public Resource {
     public:
-        void addYourselfTo(Storage *p_storage) override;
+        void addYourselfTo(Storage &storage) override;
 };
 
 

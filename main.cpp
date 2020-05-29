@@ -45,8 +45,8 @@ int main(int argc, char const *argv[]){
     Printer printer(storage, profit_counter);
 
     ThreadSpawner thread_spawner(workers);
-    thread_spawner.spawnProducersThreads(&storage, profit_counter);
-    thread_spawner.spawnWorkersThreads(&storage, wheat_source,
+    thread_spawner.spawnProducersThreads(storage, profit_counter);
+    thread_spawner.spawnWorkersThreads(storage, wheat_source,
             wood_source, iron_and_carbon_source);
 
     ResourceGenerator resource_generator(resources,

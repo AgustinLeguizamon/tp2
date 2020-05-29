@@ -6,20 +6,20 @@
 #include "storage.h"
 
 
-void Wheat::addYourselfTo(Storage *p_storage) {
-    p_storage->addResource(this);
+void Wheat::addYourselfTo(Storage &storage) {
+    storage.addResource(this);
 }
 
-void Wood::addYourselfTo(Storage *p_storage) {
-    p_storage->addResource(this);
+void Wood::addYourselfTo(Storage &storage) {
+    storage.addResource(this);
 }
 
-void Iron::addYourselfTo(Storage *p_storage) {
-    p_storage->addResource(this);
+void Iron::addYourselfTo(Storage &storage) {
+    storage.addResource(this);
 }
 
-void Carbon::addYourselfTo(Storage *p_storage) {
-    p_storage->addResource(this);
+void Carbon::addYourselfTo(Storage &storage) {
+    storage.addResource(this);
 }
 
 Resource::~Resource() = default;

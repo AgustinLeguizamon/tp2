@@ -12,12 +12,16 @@
 #include "storage.h"
 
 class Worker{
-        Storage* storage;
-        BlockingQueue* assigned_source;
+        Storage& storage;
+        BlockingQueue& assigned_source;
         bool is_working;
 
     public:
-        Worker(BlockingQueue* assigned_source, Storage* storage);
+        Worker(BlockingQueue &assigned_source, Storage &storage);
+
+        //Worker(const Worker& other) = delete;
+
+        //Worker(Worker&& other);
 
         void collectAResource();
 

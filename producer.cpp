@@ -22,7 +22,7 @@
 #define GUNSMITH_CARBON_CONSUMPTION 2
 #define MS_PRODUCER_SLEEP 60000
 
-Producer::Producer(Storage *storage, Counter& counter,
+Producer::Producer(Storage &storage, Counter& counter,
         unsigned int profit_points, unsigned int wheat,
         unsigned int wood, unsigned int iron, unsigned int carbon) :
     storage(storage),
@@ -35,20 +35,20 @@ Producer::Producer(Storage *storage, Counter& counter,
     carbon_consumption(carbon)
     {}
 
-Cook::Cook(Storage *storage, Counter& counter) :
+Cook::Cook(Storage &storage, Counter& counter) :
     Producer(storage, counter, COOK_PROFIT_POINTS, COOK_WHEAT_CONSUMPTION,
             COOK_WOOD_CONSUMPTION, COOK_IRON_CONSUMPTION,
             COOK_CARBON_CONSUMPTION )
     {}
 
-Carpenter::Carpenter(Storage *storage, Counter& counter) :
+Carpenter::Carpenter(Storage &storage, Counter& counter) :
         Producer(storage, counter, CARPENTER_PROFIT_POINTS,
                 CARPENTER_WHEAT_CONSUMPTION,
                  CARPENTER_WOOD_CONSUMPTION, CARPENTER_IRON_CONSUMPTION,
                  CARPENTER_CARBON_CONSUMPTION )
     {}
 
-Gunsmith::Gunsmith(Storage *storage, Counter &counter) :
+Gunsmith::Gunsmith(Storage &storage, Counter &counter) :
     Producer(storage, counter, GUNSMITH_PROFIT_POINTS,
             GUNSMITH_WHEAT_CONSUMPTION, GUNSMITH_WOOD_CONSUMPTION,
             GUNSMITH_IRON_CONSUMPTION, GUNSMITH_CARBON_CONSUMPTION )
@@ -58,7 +58,7 @@ void Producer::operator()() {
     while (is_producing){
         try{
             //consume los recursos
-            storage->consumeResources(wheat_consumption,wood_consumption,
+            storage.consumeResources(wheat_consumption,wood_consumption,
                     iron_consumption, carbon_consumption);
             usleep(MS_PRODUCER_SLEEP);//duerme
             //deposita los puntos de beneficio

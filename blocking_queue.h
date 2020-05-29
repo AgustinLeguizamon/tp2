@@ -27,6 +27,8 @@ class BlockingQueue {
     public:
         BlockingQueue();
 
+        BlockingQueue(const BlockingQueue& other) = delete;
+
         void push(Resource* resource);
 
         Resource* pop();

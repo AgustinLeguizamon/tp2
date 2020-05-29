@@ -30,21 +30,22 @@ private:
 public:
     explicit ThreadSpawner(std::map<std::string, int> &workers);
 
-    void spawnProducersThreads(Storage *p_storage, Counter &counter);
+    void spawnProducersThreads(Storage &storage, Counter &counter);
 
-    void spawnWorkersThreads(Storage *p_storage, BlockingQueue &wheat_source,
-            BlockingQueue &wood_source, BlockingQueue &iron_and_carbon_source);
+    void spawnWorkersThreads(Storage &storage, BlockingQueue &wheat_source,
+                             BlockingQueue &wood_source,
+                             BlockingQueue &iron_and_carbon_source);
 
     void joinWorkers();
 
     void joinProducers();
 
 private:
-    void spawnCooks(Storage* p_storage, Counter &counter);
+    void spawnCooks(Storage &storage, Counter &counter);
 
-    void spawnGunSmiths(Storage *p_storage, Counter &counter);
+    void spawnGunSmiths(Storage &storage, Counter &counter);
 
-    void spawnCarpenters(Storage *p_storage, Counter &counter);
+    void spawnCarpenters(Storage &storage, Counter &counter);
 };
 
 
