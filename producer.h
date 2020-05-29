@@ -26,7 +26,9 @@ public:
             unsigned int wood, unsigned int iron,
             unsigned int carbon);
 
-    //Producer(const Producer& other) = delete;
+    Producer(const Producer& other) = delete;
+
+    Producer(Producer&& other) noexcept;
 
     void operator()();
 };

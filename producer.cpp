@@ -69,3 +69,13 @@ void Producer::operator()() {
     }
 }
 
+Producer::Producer(Producer &&other) noexcept:
+    storage(other.storage),
+    counter(other.counter),
+    profit_points(other.profit_points),
+    is_producing(other.is_producing),
+    wheat_consumption(other.wheat_consumption),
+    wood_consumption(other.wood_consumption),
+    iron_consumption(other.iron_consumption),
+    carbon_consumption(other.carbon_consumption)
+    {}

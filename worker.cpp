@@ -30,3 +30,8 @@ void Worker::operator()() {
     }
 }
 
+Worker::Worker(Worker &&other) noexcept:
+    storage(other.storage),
+    assigned_source(other.assigned_source),
+    is_working(other.is_working)
+    {}

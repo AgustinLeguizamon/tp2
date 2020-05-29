@@ -17,9 +17,9 @@ class Worker{
     public:
         Worker(BlockingQueue &assigned_source, Storage &storage);
 
-        //Worker(const Worker& other) = delete;
+        Worker(const Worker& other) = delete;
 
-        //Worker(Worker&& other);
+        Worker(Worker&& other) noexcept;
 
         void collectAResource();
 
