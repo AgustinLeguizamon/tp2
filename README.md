@@ -7,7 +7,7 @@ Padrón: 99535
 
 Link Github: https://github.com/AgustinLeguizamon/tp2
 
-Instancia de entrega: 1
+Instancia de entrega: 2
 
 ### Introducción:
 En el siguiente diagrama de clases se resaltan las relaciones entre las clases mas relevantes en cuanto a la implementación.
@@ -19,15 +19,20 @@ Figura 1 - Diagrama de clases
 
 Siguiendo las consignas de la cátedra se cada recolector y productor es un hilo a parte del hilo principal encargado de realizar la tarea asignada, a continuación se dará una explicación de como se ha encarado el funcionamiento de cada clase.
 
-El hilo main es encargado de leer ambos archivos trabajadores.cfg y mapa.txt y de "spawnear" los hilos de trabajadores y recolectores. Ambos estarán operando desde el momento en que son creados obteniendo los recursos a partir de colas bloqueantes (recolectores) y un inventario (productores).
+El hilo principal (ejecutando el functor Game) es encargado de leer ambos archivos trabajadores.cfg y mapa.txt y de "spawnear" los hilos de trabajadores y recolectores. Ambos estarán operando desde el momento en que son creados obteniendo los recursos a partir de colas bloqueantes (recolectores) y un inventario (productores).
 La sincronización entre ambos grupos de hilos (recolectores y productores) se logra con el manejo de mutex y condition variables para el acceso en orden al inventario dado que ambos estarán agregando y sacando recursos de forma concurrente.
 
 La explicación de cada clase se da en el orden en que son creadas para dar una idea al lector de en qué momento empiezan a operar los hilos.
 
+#### Game
+
+Encargado de la logica de ejecución del programa, creando los constructores de cada objeto a utilizar, lanzando los threads y liberando los recursos al final de la llamada. 
+
+
 #### File Reader
-Encargado de leer ambos archivos, primero lee el archivo de texto trabajadores.cfg para obtener el número de productores y recolectores (hilos) que estarán operando.
+Encargado de leer ambos archivos (estos se abren al mismo tiempo), primero lee el archivo de texto trabajadores.cfg para obtener el número de productores y recolectores (hilos) que estarán operando.
 El nombre del productor junto con su número son guardados en un diccionario.
-Luego cierra este archivo y pasa a leer el mapa de los recursos (mapa.txt) de a un carácter y almacenarlos en una lista.
+Luego pasa a leer el mapa de los recursos (mapa.txt) de a un carácter y almacenarlos en una lista.
 
 **En este caso se está trabajando con todo el contenido del mapa en memoria**
 
@@ -54,13 +59,13 @@ Encargado de imprimir los resultados con la cantidad de recursos restantes en el
 #### Thread Spawner
 Esta clase está encargada de crear las clases **Worker** y **Producers** y lanzar los respectivos hilos. También se encarga de la liberación de los recursos (join) de cada thread.
 
-#### Producer (productor)
+#### Hilo: Producer
 
 Cada productor se ejecuta en un hilo, el productor intentará solicitar al inventario que consuma los recursos necesarios para su receta, caso que se cumpla depositara en el contador **Counter** los puntos de beneficio. Las cantidades de recurso a consumir y los puntos de beneficio generados depende de cada tipo de productor.
 
 *En la resolución del trabajo práctico he tomado la decisión de crear clases derivadas para cada productor pensando que esto sería conveniente dado que cada uno produce con cantidades distintas de recursos, pero al final se terminó delegando esta tarea al Storage(inventario) pasando por parámetro, en forma de receta, los recursos necesarios. Esto provoca que todos los productores usen un único operador() que es el Base y la única diferencia sean los atributos que tienen por lo que hace excesivo el hecho de usar herencia, se podría simplemente tener la clase Producer y pasar por parámetro al constructor los atributos que son las cantidades de recursos que se consumen, siguiendo la misma idea que con los recolectores (Workers)*
 
-#### Worker (Recolector)
+#### Hilo: Worker (Recolector)
 A pesar de existir distintos tipos de recolectores (leñadores, agricultores, mineros) todos son instancias de una única clase **Worker** ya que la única diferencia que tiene es el tipo de cola bloqueante que tienen asignada para extraer los recursos. Mientras estén operando, intentan quitar recursos de sus respectivas colas bloqueantes y colocarlos en el inventario del **Storage**, así hasta que la cola asignada lanza una excepción que indica que están vacías y no recibirán más recursos. En este momento terminará así la ejecución del operador() y dejará al hilo listo para un *join*.
 
 **Cada recolector es un hilo que intentara acceder a la cola y al inventario de forma concurrente, el manejo de estos accesos está explicado en cada clase**
