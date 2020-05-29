@@ -10,25 +10,26 @@
 
 #define VALID_RESOURCE_CHARACTERS "TMHC"
 
-FileReader::FileReader(const std::string& file_name) {
-    this->fs.open(file_name);
+FileReader::FileReader(const std::string &workers, const std::string &map) {
+    this->fs_workers.open(workers);
+    this->fs_resources.open(map);
 }
 
 void FileReader::changeReadingFile(const std::string &file_name) {
-    fs.close();
-    fs.clear();
-    this->fs.open(file_name);
+    fs_workers.close();
+    fs_workers.clear();
+    this->fs_resources.open(file_name);
 }
 
 std::map<std::string, int> FileReader::getMapOfWorkers(){
     std::map<std::string, int> workers;
     std::string line;
 
-    if (!fs.is_open()){
+    if (!fs_workers.is_open()){
         throw FailedToOpenFileException();
     }
 
-    while (getline(this->fs, line)){
+    while (getline(this->fs_workers, line)){
         this->addWorkerToMap(workers, line);
     }
 
@@ -53,18 +54,18 @@ void FileReader::addWorkerToMap(std::map<std::string, int>& workers,
 std::list<char> FileReader::getResources() {
     std::list<char> resources;
 
-    if (!fs.is_open()){
+    if (!fs_resources.is_open()){
         throw FailedToOpenFileException();
     }
 
-    char input_char = fs.get();
+    char input_char = fs_resources.get();
     while (input_char != EOF){
         if (input_char != '\n'){
             //checkea si es un caracter valido
             this->isValidChar(input_char);
             resources.push_back(input_char);
         }
-        input_char = fs.get();
+        input_char = fs_resources.get();
     }
 
     return resources;
@@ -77,6 +78,7 @@ void FileReader::isValidChar(const char input_char) const {
     }
 }
 
-FileReader::~FileReader() {
-   fs.close();
+FileReader::~FileReader(){
+    fs_resources.close();
+    fs_workers.close();
 }

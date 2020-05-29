@@ -27,7 +27,7 @@ class ResourceGenerator {
 
         bool addResourceToQueue() const;
 
-        void freeSources();
+        ~ResourceGenerator();
 
 private:
         void generateAResource(char resource_character) const;

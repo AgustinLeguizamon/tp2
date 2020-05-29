@@ -37,11 +37,9 @@ BlockingQueue::BlockingQueue() :
     is_close(false)
     {}
 
-void BlockingQueue::freeResources() {
-    while (!queue.empty()){
-        delete(queue.front());
+BlockingQueue::~BlockingQueue(){
+    while (!queue.empty()) {
+        delete (queue.front());
         queue.pop();
     }
 }
-
-BlockingQueue::~BlockingQueue() = default;

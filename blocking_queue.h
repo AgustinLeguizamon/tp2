@@ -35,8 +35,6 @@ class BlockingQueue {
 
         void close();
 
-        void freeResources();
-
         ~BlockingQueue();
 };
 

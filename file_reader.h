@@ -37,9 +37,10 @@ public:
 
 class FileReader{
     private:
-        std::ifstream fs;
+        std::ifstream fs_workers;
+        std::ifstream fs_resources;
     public:
-        explicit FileReader(const std::string& file_name);
+        explicit FileReader(const std::string &workers, const std::string &map);
 
         void changeReadingFile(const std::string& file_name);
 

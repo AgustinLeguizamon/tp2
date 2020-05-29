@@ -60,8 +60,5 @@ void ResourceGenerator::run() {
     iron_and_carbon_source.close();
 }
 
-void ResourceGenerator::freeSources() {
-    wheat_source.freeResources();
-    wood_source.freeResources();
-    iron_and_carbon_source.freeResources();
-}
+ResourceGenerator::~ResourceGenerator() = default;
+
