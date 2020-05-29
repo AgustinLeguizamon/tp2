@@ -71,19 +71,19 @@ void Storage::consumeResources(const unsigned int wheat_qty,
     }
 }
 
-unsigned  int Storage::getWheat(){
+unsigned int Storage::getWheat(){
     return inventory[WHEAT].size();
 }
 
-unsigned  int Storage::getWood(){
+unsigned int Storage::getWood(){
     return inventory[WOOD].size();
 }
 
-unsigned  int Storage::getIron(){
+unsigned int Storage::getIron(){
     return inventory[IRON].size();
 }
 
-unsigned  int Storage::getCarbon(){
+unsigned int Storage::getCarbon(){
     return inventory[CARBON].size();
 }
 

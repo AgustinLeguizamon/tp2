@@ -9,7 +9,7 @@ Printer::Printer(Storage &storage, Counter &profit_counter) :
     profit_counter(profit_counter)
     {}
 
-void Printer::showResults() {
+void Printer::showResults() const{
     unsigned int remaining_wheat = storage.getWheat();
     unsigned int remaining_wood = storage.getWood();
     unsigned int remaining_iron = storage.getIron();

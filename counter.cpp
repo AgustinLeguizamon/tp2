@@ -15,6 +15,6 @@ void Counter::add(const unsigned int profit_points) {
  }
 
 
-unsigned int Counter::getPoints() {
+unsigned int Counter::getPoints() const{
     return total_profit_points;
 }

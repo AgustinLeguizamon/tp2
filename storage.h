@@ -32,7 +32,7 @@ private:
     }resource_t;
 
     std::mutex mutex;
-    std::map<resource_t, std::queue<Resource*> > inventory;
+    std::map<resource_t, std::queue<Resource*>> inventory;
     std::condition_variable cond_var;
     bool is_close;
 

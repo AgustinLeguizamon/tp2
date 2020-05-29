@@ -20,7 +20,7 @@ public:
 
     void add(unsigned int profit_points);
 
-    unsigned int getPoints();
+    unsigned int getPoints() const;
 };
 
 

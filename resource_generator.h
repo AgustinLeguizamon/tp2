@@ -26,12 +26,12 @@ class ResourceGenerator {
 
         void run();
 
-        bool addResourceToQueue();
+        bool addResourceToQueue() const;
 
-    void freeSources();
+        void freeSources();
 
 private:
-        void generateAResource(char resource_character);
+        void generateAResource(char resource_character) const;
 };
 
 

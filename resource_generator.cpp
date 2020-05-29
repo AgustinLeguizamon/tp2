@@ -16,7 +16,7 @@ ResourceGenerator::ResourceGenerator(std::list<char> &resources,
     {}
 
 
-bool ResourceGenerator::addResourceToQueue() {
+bool ResourceGenerator::addResourceToQueue() const {
     bool is_empty = resources.empty();
 
     if (!is_empty){
@@ -28,7 +28,7 @@ bool ResourceGenerator::addResourceToQueue() {
     return is_empty;
 }
 
-void ResourceGenerator::generateAResource(char resource_character) {
+void ResourceGenerator::generateAResource(const char resource_character) const {
     switch (resource_character){
         case 'T':
             this->wheat_source.push(new Wheat());

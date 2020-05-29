@@ -17,7 +17,7 @@ private:
 public:
     Printer(Storage &storage, Counter &profit_counter);
 
-    void showResults();
+    void showResults() const;
 };
 
 
