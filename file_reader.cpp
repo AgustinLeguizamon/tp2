@@ -6,9 +6,7 @@
 //cpplint
 #include <map>
 #include <string>
-#include <list>
 
-#define VALID_RESOURCE_CHARACTERS "TMHC"
 
 FileReader::FileReader(const std::string &workers, const std::string &map) {
     this->fs_workers.open(workers);
@@ -44,32 +42,13 @@ void FileReader::addWorkerToMap(std::map<std::string, int>& workers,
     workers.insert({worker, qty});
 }
 
-
-std::list<char> FileReader::getResources() {
-    std::list<char> resources;
-
-    if (!fs_resources.is_open()){
-        throw FailedToOpenFileException();
-    }
-
+char FileReader::getResource(){
     char input_char = fs_resources.get();
-    while (input_char != EOF){
-        if (input_char != '\n'){
-            //checkea si es un caracter valido
-            this->isValidChar(input_char);
-            resources.push_back(input_char);
-        }
+    while (input_char == '\n'){
         input_char = fs_resources.get();
     }
 
-    return resources;
-}
-
-void FileReader::isValidChar(const char input_char) const {
-    std::string valid_chars = VALID_RESOURCE_CHARACTERS;
-    if (valid_chars.find(input_char) == std::string::npos){
-        throw InvalidMapCharacterException();
-    }
+    return input_char;
 }
 
 FileReader::~FileReader(){

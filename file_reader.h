@@ -7,8 +7,6 @@
 
 #include <fstream>
 #include <map>
-#include <vector>
-#include <list>
 //cpplint
 #include <string>
 
@@ -45,8 +43,8 @@ public:
     /*Devuelve un mapa con key: nombre de los trabajadores y value: cantidad*/
     std::map<std::string, int> getMapOfWorkers();
 
-    /*Devuelve una lista con todos los caracteres del archivo mapa*/
-    std::list<char> getResources();
+    /*Devuelve el siguiente caracter del mapa de recursos*/
+    char getResource();
 
     ~FileReader();
 
@@ -55,10 +53,6 @@ private:
      * en el string @param line*/
     void addWorkerToMap(std::map<std::string, int>& workers,
                 const std::string& line) const;
-
-    /*Lanza una excepcion si el caracter @param input_char no corresponde a ninguno
-     * de los caracteres definidos para cada recurso (T,H,M,C)*/
-    void isValidChar(char input_char) const;
 };
 
 #endif //TP2CLION_FILE_READER_H

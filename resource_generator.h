@@ -7,18 +7,18 @@
 
 
 #include "blocking_queue.h"
-#include <list>
+#include "file_reader.h"
 
 class Resource;
 class ResourceGenerator {
     private:
-        std::list<char> &resources;
+        FileReader &file_reader;
         BlockingQueue &wheat_source;
         BlockingQueue &wood_source;
         BlockingQueue &iron_and_carbon_source;
 
     public:
-        ResourceGenerator(std::list<char> &resources,
+        ResourceGenerator(FileReader& file_reader,
                 BlockingQueue &wheat_source,
                 BlockingQueue &wood_source,
                 BlockingQueue &iron_and_carbon_source);
@@ -27,14 +27,16 @@ class ResourceGenerator {
          * luego cierra cada queue.*/
         void run();
 
-        /*Saca el primer recurso de la lista y lo agrega a la BLockingQueue
-         * del tipo correspondiente*/
-        bool addResourceToQueue() const;
-
         ~ResourceGenerator();
 
-private:
-        void generateAResource(char resource_character) const;
+    private:
+        /*Obtiene el siguiente caracter del mapa de recursos y lo agrega a la BlockingQueue
+         * del tipo correspondiente*/
+        char addResourceToQueue() const;
+
+        /*Reserva en el heap un nuevo recurso (Resource) del tipo indicado
+         * por @param c_resource*/
+        void generateAResource(char c_resource) const;
 };
 
 

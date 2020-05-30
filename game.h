@@ -17,7 +17,6 @@ class Game {
 private:
     FileReader file_reader;
     std::map<std::string, int> workers;
-    std::list<char> resources;
 
 public:
     explicit Game(const char* argv[]);

@@ -3,33 +3,29 @@
 //
 
 #include "resource_generator.h"
-//cpplint
-#include <list>
 
-ResourceGenerator::ResourceGenerator(std::list<char> &resources,
+
+ResourceGenerator::ResourceGenerator(FileReader& file_reader,
         BlockingQueue &wheat_source, BlockingQueue &wood_source,
         BlockingQueue &iron_and_carbon_source) :
-    resources(resources),
+    file_reader(file_reader),
     wheat_source(wheat_source),
     wood_source(wood_source),
     iron_and_carbon_source(iron_and_carbon_source)
     {}
 
 
-bool ResourceGenerator::addResourceToQueue() const {
-    bool is_empty = resources.empty();
-
-    if (!is_empty){
-        char resource_character = this->resources.front();
-        resources.pop_front();
-        this->generateAResource(resource_character);
+char ResourceGenerator::addResourceToQueue() const {
+    char c_resource = file_reader.getResource();
+    if (c_resource != EOF){
+        this->generateAResource(c_resource);
     }
 
-    return is_empty;
+    return c_resource;
 }
 
-void ResourceGenerator::generateAResource(const char resource_character) const {
-    switch (resource_character){
+void ResourceGenerator::generateAResource(char c_resource) const {
+    switch (c_resource){
         case 'T':
             this->wheat_source.push(new Wheat());
             break;
@@ -43,16 +39,15 @@ void ResourceGenerator::generateAResource(const char resource_character) const {
             this->iron_and_carbon_source.push(new Iron());
             break;
         default:
-            //throw(CharacterIsNotAResourceException)
-            break;
+            throw InvalidMapCharacterException();
     }
 }
 
 void ResourceGenerator::run() {
-    bool is_empty;
-    do {
-        is_empty = this->addResourceToQueue();
-    } while (!is_empty);
+    char is_end_of_file;
+    do{
+         is_end_of_file = this->addResourceToQueue();
+    } while (is_end_of_file != EOF);
     //cuando se vacien los recursos del mapa le digo a las queue
     // que no se van a llenar mas
     wheat_source.close();

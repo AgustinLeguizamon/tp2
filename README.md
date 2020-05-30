@@ -30,11 +30,8 @@ Encargado de la logica de ejecución del programa, creando los constructores de 
 
 
 #### File Reader
-Encargado de leer ambos archivos (estos se abren al mismo tiempo), primero lee el archivo de texto trabajadores.cfg para obtener el número de productores y recolectores (hilos) que estarán operando.
+Encargado de leer ambos archivos (estos se abren al mismo tiempo), lee el archivo de texto trabajadores.cfg para obtener el número de productores y recolectores (hilos) que estarán operando.
 El nombre del productor junto con su número son guardados en un diccionario.
-Luego pasa a leer el mapa de los recursos (mapa.txt) de a un carácter y almacenarlos en una lista.
-
-**En este caso se está trabajando con todo el contenido del mapa en memoria**
 
 #### Blocking Queue
 Encargados de almacenar los recursos asignados, la clase **Resource Generator** 
@@ -72,7 +69,7 @@ A pesar de existir distintos tipos de recolectores (leñadores, agricultores, mi
 
 
 #### Resource Generator
-Encargado de recorrer la lista con los recursos generada por **File Reader** y crear (con un New) él **Resource** correspondiente al caracter para pushear a aquella cola bloqueante asignada para ese tipo de recurso. Luego cuando la lista de recursos se vacía, cierra cada cola bloqueante de manera de indicar a cada uno que no recibirá más recursos desde ese punto en adelante.
+Encargado de obtener los caracteres que representan a cada recurso presente en el archivo mapa.txt a través de la función `getResource()` de **File Reader** y crear (con un New) él **Resource** correspondiente al caracter para pushear a aquella cola bloqueante asignada para ese tipo de recurso. Luego cuando la lista de recursos se vacía, cierra cada cola bloqueante de manera de indicar a cada uno que no recibirá más recursos desde ese punto en adelante.
 
 
 #### Resource

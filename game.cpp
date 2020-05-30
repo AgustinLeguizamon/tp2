@@ -12,7 +12,6 @@
 
 Game::Game(const char *argv[]) : file_reader(argv[1], argv[2]){
     workers = file_reader.getMapOfWorkers();
-    resources = file_reader.getResources();
 }
 
 void Game::operator()() {
@@ -29,7 +28,7 @@ void Game::operator()() {
     thread_spawner.spawnWorkersThreads(storage, wheat_source,
                                        wood_source, iron_and_carbon_source);
 
-    ResourceGenerator resource_generator(resources,
+    ResourceGenerator resource_generator(file_reader,
             wheat_source, wood_source, iron_and_carbon_source);
 
     resource_generator.run();
