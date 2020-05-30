@@ -11,7 +11,6 @@
 //cpplint
 #include <string>
 #include <map>
-#include <list>
 
 class Game {
 private:
