@@ -85,4 +85,6 @@ void Storage::addResource(Carbon* carbon)
 
 *Nuevamente al principio del trabajo se consideró útil el que cada recurso sea una clase distinta derivada de Resource y para el cual se pudo implementar DoubleDispatch, aunque parece algo excesivo dado que podría tratar directamente como una instancia de Resource y así evitar la herencia pero debería verse el tema de cómo agregar cada recurso al inventario y la identificación de critical section y que este sea atómico*
 
+> Sí, lamentablemente double dispatch es un trauma que nos deja Algoritmos III.
 
+**Entrega final**: Se aplicaron las correcciones marcadas y otras mejoras RAII que no fueron marcadas. Nota final: 10
